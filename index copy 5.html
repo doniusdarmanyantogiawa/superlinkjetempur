@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKYSTRIKE VAULT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --bg: #f1f5f9;
+            --text: #0f172a;
+            /* Button Themes dengan Transparansi (RGBA) */
+            --glass-black: rgba(30, 41, 59, 0.7);
+            --glass-blue: rgba(37, 99, 235, 0.7);
+            --glass-red: rgba(220, 38, 38, 0.7);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+
+        /* ----- COMBAT LAYER ----- */
+        #combat-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .aircraft { position: absolute; width: 140px; z-index: 10; filter: drop-shadow(0 15px 10px rgba(0,0,0,0.2)); }
+        .missile { position: absolute; width: 6px; height: 25px; background: linear-gradient(to bottom, #475569, #1e293b); border-radius: 4px; box-shadow: 0 0 15px rgba(255, 69, 0, 0.8); }
+        .explosion-fire { position: absolute; width: 120px; height: 120px; background: radial-gradient(circle, #fff 0%, #fbbf24 20%, #ef4444 50%, #7f1d1d 80%, transparent 100%); border-radius: 50%; animation: fire-burst 0.7s forwards; }
+        @keyframes fire-burst { 0% { transform: scale(0); opacity: 1; } 100% { transform: scale(2.5); opacity: 0; } }
+
+        /* ----- HEADER TRANSPARAN ----- */
+        header { 
+            position: fixed; top: 0; width: 100%; height: 180px; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            background: rgba(255, 255, 255, 0.4); /* Transparan */
+            backdrop-filter: blur(15px); /* Efek Blur Kaca */
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 2000; transition: 0.6s; border-bottom: 1px solid rgba(255,255,255,0.3); 
+        }
+        header.scrolled { height: 70px; flex-direction: row; padding: 0 40px; justify-content: flex-start; background: rgba(255, 255, 255, 0.6); }
+        
+        .profile-wrap { width: 80px; height: 80px; border-radius: 50%; padding: 4px; background: linear-gradient(45deg, var(--primary), var(--secondary)); margin-bottom: 10px; transition: 0.5s; }
+        header.scrolled .profile-wrap { width: 40px; height: 40px; margin-bottom: 0; margin-right: 15px; }
+        .profile-wrap img { width: 100%; height: 100%; border-radius: 50%; border: 3px solid white; object-fit: cover; }
+        header h1 { font-size: 1.8rem; font-weight: 800; color: var(--text); }
+
+        /* ----- UI CONTENT ----- */
+        .content { position: relative; z-index: 100; margin-top: 220px; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        
+        /* FORM TRANSPARAN */
+        .add-form { 
+            background: rgba(255, 255, 255, 0.3); 
+            backdrop-filter: blur(10px);
+            padding: 25px; border-radius: 24px; width: 100%; max-width: 800px; 
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05); margin-bottom: 50px; 
+        }
+        .input-group { display: flex; gap: 10px; margin-bottom: 15px; }
+        input { 
+            flex: 1; padding: 15px; border-radius: 12px; 
+            border: 1px solid rgba(255,255,255,0.5); 
+            background: rgba(255, 255, 255, 0.5);
+            outline: none; font-weight: 600; transition: 0.3s;
+        }
+        input:focus { background: rgba(255, 255, 255, 0.8); border-color: var(--primary); }
+        
+        /* TACTICAL COLOR BUTTONS */
+        .color-selector { display: flex; gap: 10px; align-items: center; margin-bottom: 15px; justify-content: center; }
+        .color-opt { width: 45px; height: 45px; border-radius: 12px; cursor: pointer; border: 3px solid transparent; transition: 0.3s; backdrop-filter: blur(5px); }
+        .color-opt.active { border-color: white; transform: scale(1.1); box-shadow: 0 0 15px rgba(0,0,0,0.2); }
+        .opt-black { background: var(--glass-black); }
+        .opt-blue { background: var(--glass-blue); }
+        .opt-red { background: var(--glass-red); }
+
+        .btn-deploy { 
+            width: 100%; height: 50px; border-radius: 12px; border: none;
+            background: var(--primary); color: white; font-weight: 800; cursor: pointer;
+            transition: 0.3s; opacity: 0.9;
+        }
+        .btn-deploy:hover { opacity: 1; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4); }
+
+        /* CATEGORY SECTIONS */
+        .category-section { width: 100%; max-width: 1000px; margin-bottom: 40px; }
+        .category-divider { display: flex; align-items: center; margin-bottom: 20px; }
+        .category-divider span { font-weight: 800; font-size: 0.75rem; color: #475569; letter-spacing: 2px; padding-right: 15px; }
+        .category-divider .line { flex: 1; height: 1px; background: linear-gradient(to right, rgba(0,0,0,0.1), transparent); }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+
+        /* CARDS DENGAN EFEK TRANSPARAN */
+        .card-container { position: relative; }
+        .card { 
+            padding: 25px; border-radius: 18px; text-decoration: none; color: white; 
+            font-weight: 700; display: flex; align-items: center; justify-content: center; 
+            transition: 0.4s; text-align: center; min-height: 85px; 
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .card:hover { transform: translateY(-8px); filter: brightness(1.2); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+        
+        .card-black { background: var(--glass-black); }
+        .card-blue { background: var(--glass-blue); }
+        .card-red { background: var(--glass-red); }
+
+        .delete-btn { 
+            position: absolute; top: -5px; right: -5px; width: 26px; height: 26px; 
+            background: rgba(255, 255, 255, 0.8); color: #ef4444; border: none; 
+            border-radius: 50%; cursor: pointer; font-size: 10px; font-weight: 900; 
+            display: flex; align-items: center; justify-content: center; 
+            opacity: 0; transition: 0.2s; z-index: 10; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .card-container:hover .delete-btn { opacity: 1; }
+
+        #sound-toggle { 
+            position: fixed; bottom: 20px; left: 20px; width: 50px; height: 50px; 
+            border-radius: 50%; background: rgba(255,255,255,0.5); 
+            backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3);
+            cursor: pointer; z-index: 3000; font-size: 20px; transition: 0.3s;
+        }
+        #sound-toggle:hover { background: rgba(255,255,255,0.8); }
+
+        /* kode tambahan responsive */
+        /* ================================================================================= */
+        /* ... (Gunakan CSS sebelumnya, namun tambahkan/ubah bagian ini) ... */
+
+    /* GRID UTAMA */
+    .grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+        gap: 20px; 
+    }
+
+    /* RESPONSIVE MOBILE OPTIMIZATION */
+    @media (max-width: 600px) {
+        /* Header lebih ramping di mobile */
+        header { height: 140px; }
+        header h1 { font-size: 1.4rem; }
+        
+        /* Form Input satu baris agar hemat ruang */
+        .input-group { flex-direction: column; gap: 8px; }
+        input { padding: 12px; font-size: 0.9rem; }
+
+        /* GRID MOBILE: 1 Baris muat 2 Tombol */
+        .grid { 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 10px; 
+        }
+
+        /* Ukuran Tombol di Mobile */
+        .card { 
+            padding: 15px 10px; 
+            min-height: 60px; 
+            font-size: 0.85rem; 
+            border-radius: 14px;
+        }
+
+        .category-divider span { font-size: 0.65rem; }
+
+        /* Pesawat diperkecil sedikit agar tidak menutupi layar mobile */
+        .aircraft { width: 100px; }
+        
+        /* Tombol Hapus lebih mudah ditekan di mobile */
+        .delete-btn {
+            opacity: 1; /* Selalu muncul di mobile karena tidak ada hover */
+            top: -4px;
+            right: -4px;
+            width: 22px;
+            height: 22px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+    }
+    </style>
+</head>
+<body>
+
+    <div id="combat-layer"></div>
+    <button id="sound-toggle" onclick="toggleSound()">🔊</button>
+
+    <header id="header">
+        <div class="profile-wrap"><img src="file/upgradediri.jpg" alt="Profile"></div>
+        <div class="info">
+            <h1>SKYSTRIKE VAULT</h1>
+            <p style="font-size: 0.8rem; color: #475569; font-weight: 800; letter-spacing: 1px; text-align: center;">AIR-GUARDED COMMAND</p>
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="add-form">
+            <div class="input-group">
+                <input type="text" id="name" placeholder="Nama Website">
+                <input type="text" id="url" placeholder="URL(bangdonicode.com)">
+            </div>
+            <div class="color-selector">
+                <span style="font-size: 0.75rem; font-weight: 800; color: #475569; margin-right: 10px;">SELECTION:</span>
+                <div class="color-opt opt-black active" onclick="selectColor('black', this)"></div>
+                <div class="color-opt opt-blue" onclick="selectColor('blue', this)"></div>
+                <div class="color-opt opt-red" onclick="selectColor('red', this)"></div>
+            </div>
+            <button class="btn-deploy" onclick="add()">DEPLOY TO VAULT</button>
+        </div>
+
+        <div id="vault-sections" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+    </div>
+
+    <script>
+        let selectedColor = 'black';
+        let db = JSON.parse(localStorage.getItem('tactical_links')) || [];
+        let isMuted = false;
+        const boomSound = new Audio('https://www.soundjay.com/mechanical/sounds/explosion-01.mp3');
+
+        function selectColor(color, el) {
+            selectedColor = color;
+            document.querySelectorAll('.color-opt').forEach(opt => opt.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function draw() {
+            const container = document.getElementById('vault-sections');
+            container.innerHTML = '';
+
+            const categories = [
+                { id: 'black', label: 'STEALTH SECTOR' },
+                { id: 'blue', label: 'SKY SECTOR' },
+                { id: 'red', label: 'STRIKE SECTOR' }
+            ];
+
+            categories.forEach(cat => {
+                const filtered = db.filter(l => l.color === cat.id);
+                if (filtered.length > 0) {
+                    const section = document.createElement('div');
+                    section.className = 'category-section';
+                    section.innerHTML = `
+                        <div class="category-divider">
+                            <span>${cat.label}</span>
+                            <div class="line"></div>
+                        </div>
+                        <div class="grid">
+                            ${filtered.map(l => `
+                                <div class="card-container">
+                                    <button class="delete-btn" onclick="remove('${l.id}')">✕</button>
+                                    <a href="${l.url}" target="_blank" class="card card-${cat.id}">
+                                        ${l.name}
+                                    </a>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    container.appendChild(section);
+                }
+            });
+            localStorage.setItem('tactical_links', JSON.stringify(db));
+        }
+
+        function add() {
+            const n = document.getElementById('name'), u = document.getElementById('url');
+            if(n.value && u.value) {
+                let finalUrl = u.value;
+                if (!/^https?:\/\//i.test(finalUrl)) finalUrl = 'https://' + finalUrl;
+                db.push({ id: Date.now().toString(), name: n.value, url: finalUrl, color: selectedColor });
+                n.value = ''; u.value = '';
+                draw();
+            }
+        }
+
+        function remove(id) {
+            if(confirm('Hapus dari Vault?')) {
+                db = db.filter(l => l.id !== id);
+                draw();
+            }
+        }
+
+        function toggleSound() {
+            isMuted = !isMuted;
+            document.getElementById('sound-toggle').innerHTML = isMuted ? '🔇' : '🔊';
+        }
+
+        function boom(x, y) {
+            if (!isMuted) { const s = boomSound.cloneNode(); s.volume = 0.3; s.play().catch(()=>{}); }
+            const b = document.createElement('div');
+            b.className = 'explosion-fire';
+            b.style.left = (x - 60) + 'px'; b.style.top = (y - 60) + 'px';
+            document.getElementById('combat-layer').appendChild(b);
+            setTimeout(() => b.remove(), 700);
+        }
+
+        function spawn() {
+            const p = document.createElement('img');
+            p.src = "file/f22.png";
+            p.className = 'aircraft';
+            document.getElementById('combat-layer').appendChild(p);
+            const side = Math.random() > 0.5;
+            let x = side ? -200 : window.innerWidth + 200, y = 50 + Math.random() * 250;
+            let angle = 0, speed = 5 + Math.random() * 5;
+            const fly = setInterval(() => {
+                angle += 0.05; x += side ? speed : -speed;
+                y += Math.sin(angle) * 4;
+                p.style.transform = `scaleX(${side ? 1 : -1}) rotate(${Math.sin(angle) * 15}deg)`;
+                p.style.left = x + 'px'; p.style.top = y + 'px';
+                if(Math.random() < 0.02) drop(x + 70, y + 40);
+                if(x > window.innerWidth + 300 || x < -300) { clearInterval(fly); p.remove(); }
+            }, 20);
+        }
+
+        function drop(x, y) {
+            const m = document.createElement('div'); m.className = 'missile';
+            m.style.left = x + 'px'; m.style.top = y + 'px';
+            document.getElementById('combat-layer').appendChild(m);
+            let my = y;
+            const fall = setInterval(() => {
+                my += 10; m.style.top = my + 'px';
+                if(my > window.innerHeight - 50) { clearInterval(fall); boom(x, my); m.remove(); }
+            }, 16);
+        }
+
+        window.onscroll = () => {
+            const h = document.getElementById('header');
+            if(window.scrollY > 50) h.classList.add('scrolled');
+            else h.classList.remove('scrolled');
+        };
+
+        setInterval(spawn, 2000);
+        draw();
+    </script>
+</body>
+</html>
