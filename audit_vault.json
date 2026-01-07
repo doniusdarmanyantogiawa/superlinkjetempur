@@ -22,7 +22,20 @@
       "trading",
       "deskripsi"
     ],
-    "data": []
+    "data": [
+      {
+        "_id": "r1767777052290",
+        "no": "1",
+        "trading": "data permanen",
+        "deskripsi": "data permanen susah untuk di hapus"
+      },
+      {
+        "_id": "r1767777003146",
+        "no": "1",
+        "trading": "Data Permanen",
+        "deskripsi": "data pernamanen dapat disimpan"
+      }
+    ]
   },
   {
     "id": "t1767776535555",
