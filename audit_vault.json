@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "id": "t1767785181596",
+    "name": "Belajar Trading",
+    "columns": [
+      "No",
+      "Deskripsi",
+      "Keterangan"
+    ],
+    "data": [],
+    "bgColor": "#06b6d4"
+  }
+]
