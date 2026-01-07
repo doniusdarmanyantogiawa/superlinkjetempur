@@ -15,5 +15,17 @@
         "Keterangan": "sebuah makanan instan"
       }
     ]
+  },
+  {
+    "id": "t1767775163420",
+    "name": "Tabel Pengetahuan Trading",
+    "columns": [
+      "No",
+      "Nama",
+      "Deskripsi",
+      "Keterangan",
+      "Kunci"
+    ],
+    "data": []
   }
 ]
