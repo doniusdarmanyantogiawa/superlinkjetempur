@@ -1,20 +1,5 @@
 [
   {
-    "id": "t1767775865323",
-    "name": "Data Treding 2",
-    "columns": [
-      "no",
-      "trading"
-    ],
-    "data": [
-      {
-        "_id": "r1767776160274",
-        "no": "halaman rumah",
-        "trading": "halaman treding"
-      }
-    ]
-  },
-  {
     "id": "t1767775898587",
     "name": "Data Treding 3",
     "columns": [
@@ -22,14 +7,7 @@
       "trading",
       "deskripsi"
     ],
-    "data": [
-      {
-        "_id": "r1767777003146",
-        "no": "1",
-        "trading": "Data Permanen",
-        "deskripsi": "data pernamanen dapat disimpan"
-      }
-    ]
+    "data": []
   },
   {
     "id": "t1767776535555",
@@ -82,5 +60,15 @@
     ],
     "data": [],
     "bgColor": "#1e293b"
+  },
+  {
+    "id": "t1767779415105",
+    "name": "nama akun",
+    "columns": [
+      "nama",
+      "email"
+    ],
+    "data": [],
+    "bgColor": "#10b981"
   }
 ]
