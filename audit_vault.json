@@ -26,6 +26,15 @@
       "Keterangan",
       "Kunci"
     ],
-    "data": []
+    "data": [
+      {
+        "_id": "r1767775569603",
+        "No": "1",
+        "Nama": "makan",
+        "Deskripsi": "makan makan",
+        "Keterangan": "makan adalah mengisi perut yang kosong",
+        "Kunci": ""
+      }
+    ]
   }
 ]
