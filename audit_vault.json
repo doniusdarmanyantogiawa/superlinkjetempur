@@ -36,5 +36,15 @@
       "trading"
     ],
     "data": []
+  },
+  {
+    "id": "t1767775898587",
+    "name": "Data Treding 3",
+    "columns": [
+      "no",
+      "trading",
+      "deskripsi"
+    ],
+    "data": []
   }
 ]
