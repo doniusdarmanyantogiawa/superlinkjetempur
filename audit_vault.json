@@ -35,7 +35,13 @@
       "no",
       "trading"
     ],
-    "data": []
+    "data": [
+      {
+        "_id": "r1767776160274",
+        "no": "halaman rumah",
+        "trading": "halaman treding"
+      }
+    ]
   },
   {
     "id": "t1767775898587",
