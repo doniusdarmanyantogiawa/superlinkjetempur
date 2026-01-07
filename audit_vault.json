@@ -45,7 +45,14 @@
       "Deskripsi",
       "Pemula"
     ],
-    "data": [],
+    "data": [
+      {
+        "_id": "r1767777080842",
+        "No": "1",
+        "Deskripsi": "data 1",
+        "Pemula": "data 2"
+      }
+    ],
     "bgColor": "#ef4444",
     "textColor": "#f1f5f9"
   }
