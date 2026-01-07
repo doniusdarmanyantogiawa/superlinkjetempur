@@ -1,15 +1,5 @@
 [
   {
-    "id": "t1767775898587",
-    "name": "Data Treding 3",
-    "columns": [
-      "no",
-      "trading",
-      "deskripsi"
-    ],
-    "data": []
-  },
-  {
     "id": "t1767776535555",
     "name": "Trading Pemula",
     "columns": [
@@ -17,14 +7,7 @@
       "Deskripsi",
       "Pemula"
     ],
-    "data": [
-      {
-        "_id": "r1767777080842",
-        "No": "1",
-        "Deskripsi": "data 1",
-        "Pemula": "data 2"
-      }
-    ],
+    "data": [],
     "bgColor": "#ef4444",
     "textColor": "#f1f5f9"
   },
@@ -70,5 +53,18 @@
     ],
     "data": [],
     "bgColor": "#10b981"
+  },
+  {
+    "id": "t1767779586393",
+    "name": "akun",
+    "columns": [
+      "akun1",
+      "akun2",
+      "akun3",
+      "akun4",
+      "akun5"
+    ],
+    "data": [],
+    "bgColor": "#1e293b"
   }
 ]
