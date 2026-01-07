@@ -15,5 +15,17 @@
       }
     ],
     "bgColor": "#06b6d4"
+  },
+  {
+    "id": "t1767785285718",
+    "name": "Belajar Investasi",
+    "columns": [
+      "No",
+      "Deskripsi",
+      "Keterangan",
+      "Kunci Sukses"
+    ],
+    "data": [],
+    "bgColor": "#8b5cf6"
   }
 ]
