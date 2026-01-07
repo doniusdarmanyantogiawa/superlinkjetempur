@@ -1,17 +1,5 @@
 [
   {
-    "id": "t1767776535555",
-    "name": "Trading Pemula",
-    "columns": [
-      "No",
-      "Deskripsi",
-      "Pemula"
-    ],
-    "data": [],
-    "bgColor": "#ef4444",
-    "textColor": "#f1f5f9"
-  },
-  {
     "id": "t1767777281714",
     "name": "aku",
     "columns": [
@@ -64,7 +52,15 @@
       "akun4",
       "akun5"
     ],
-    "data": [],
+    "data": [
+      {
+        "akun1": "fdfds",
+        "akun2": "fsaffa",
+        "akun3": "dfafa",
+        "akun4": "",
+        "akun5": ""
+      }
+    ],
     "bgColor": "#1e293b"
   }
 ]
