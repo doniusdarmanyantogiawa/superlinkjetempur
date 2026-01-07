@@ -49,5 +49,16 @@
     ],
     "bgColor": "#ef4444",
     "textColor": "#f1f5f9"
+  },
+  {
+    "id": "t1767777281714",
+    "name": "aku",
+    "columns": [
+      "aku",
+      "kamu",
+      "mereka"
+    ],
+    "data": [],
+    "bgColor": "#64748b"
   }
 ]
