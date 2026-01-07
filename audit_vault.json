@@ -7,6 +7,13 @@
       "Deskripsi",
       "Keterangan"
     ],
-    "data": []
+    "data": [
+      {
+        "_id": "r1767775084516",
+        "Nomor": " 1",
+        "Deskripsi": "Pop mie",
+        "Keterangan": "sebuah makanan instan"
+      }
+    ]
   }
 ]
