@@ -1,34 +1,5 @@
 [
   {
-    "id": "t1767775163420",
-    "name": "Tabel Pengetahuan Trading",
-    "columns": [
-      "No",
-      "Nama",
-      "Deskripsi",
-      "Keterangan",
-      "Kunci"
-    ],
-    "data": [
-      {
-        "_id": "r1767775619018",
-        "No": "makan",
-        "Nama": "makanan mie instan",
-        "Deskripsi": "dapa membahayakan",
-        "Keterangan": "buat tubuh ",
-        "Kunci": "asik di makan"
-      },
-      {
-        "_id": "r1767775569603",
-        "No": "1",
-        "Nama": "makan",
-        "Deskripsi": "makan makan",
-        "Keterangan": "makan adalah mengisi perut yang kosong",
-        "Kunci": ""
-      }
-    ]
-  },
-  {
     "id": "t1767775865323",
     "name": "Data Treding 2",
     "columns": [
@@ -52,5 +23,17 @@
       "deskripsi"
     ],
     "data": []
+  },
+  {
+    "id": "t1767776535555",
+    "name": "Trading Pemula",
+    "columns": [
+      "No",
+      "Deskripsi",
+      "Pemula"
+    ],
+    "data": [],
+    "bgColor": "#ef4444",
+    "textColor": "#f1f5f9"
   }
 ]
