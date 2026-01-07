@@ -1,26 +1,5 @@
 [
   {
-    "id": "t1767779586393",
-    "name": "akun",
-    "columns": [
-      "akun1",
-      "akun2",
-      "akun3",
-      "akun4",
-      "akun5"
-    ],
-    "data": [
-      {
-        "akun1": "fdfds",
-        "akun2": "fsaffa",
-        "akun3": "dfafa",
-        "akun4": "",
-        "akun5": ""
-      }
-    ],
-    "bgColor": "#1e293b"
-  },
-  {
     "id": "t1767781877780",
     "name": "dfsfsf",
     "columns": [
