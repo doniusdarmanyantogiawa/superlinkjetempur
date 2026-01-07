@@ -1,22 +1,5 @@
 [
   {
-    "id": "t1767775036956",
-    "name": "Tabel Pengetahuan",
-    "columns": [
-      "Nomor",
-      "Deskripsi",
-      "Keterangan"
-    ],
-    "data": [
-      {
-        "_id": "r1767775084516",
-        "Nomor": " 1",
-        "Deskripsi": "Pop mie",
-        "Keterangan": "sebuah makanan instan"
-      }
-    ]
-  },
-  {
     "id": "t1767775163420",
     "name": "Tabel Pengetahuan Trading",
     "columns": [
@@ -44,5 +27,14 @@
         "Kunci": ""
       }
     ]
+  },
+  {
+    "id": "t1767775865323",
+    "name": "Data Treding 2",
+    "columns": [
+      "no",
+      "trading"
+    ],
+    "data": []
   }
 ]
