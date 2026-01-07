@@ -7,7 +7,13 @@
       "Deskripsi",
       "Keterangan"
     ],
-    "data": [],
+    "data": [
+      {
+        "No": "1",
+        "Deskripsi": "Kustodian",
+        "Keterangan": "Imbalan yang harus di bayarkan oleh lembaga keuangan atau instansi"
+      }
+    ],
     "bgColor": "#06b6d4"
   }
 ]
