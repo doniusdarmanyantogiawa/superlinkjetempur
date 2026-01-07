@@ -28,6 +28,14 @@
     ],
     "data": [
       {
+        "_id": "r1767775619018",
+        "No": "makan",
+        "Nama": "makanan mie instan",
+        "Deskripsi": "dapa membahayakan",
+        "Keterangan": "buat tubuh ",
+        "Kunci": "asik di makan"
+      },
+      {
         "_id": "r1767775569603",
         "No": "1",
         "Nama": "makan",
