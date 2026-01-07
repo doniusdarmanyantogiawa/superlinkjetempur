@@ -39,7 +39,16 @@
       "nama",
       "email"
     ],
-    "data": [],
+    "data": [
+      {
+        "nama": "dff",
+        "email": "fafafa"
+      },
+      {
+        "nama": "dff",
+        "email": "fafafa"
+      }
+    ],
     "bgColor": "#10b981"
   },
   {
