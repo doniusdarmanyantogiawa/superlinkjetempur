@@ -72,16 +72,6 @@
     "bgColor": "#10b981"
   },
   {
-    "id": "t1767779424153",
-    "name": "nama akun",
-    "columns": [
-      "nama",
-      "email"
-    ],
-    "data": [],
-    "bgColor": "#10b981"
-  },
-  {
     "id": "t1767779439145",
     "name": "nama akun",
     "columns": [
