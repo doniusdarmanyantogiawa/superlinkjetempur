@@ -14,95 +14,110 @@
             --glass-black: rgba(30, 41, 59, 0.7);
             --glass-blue: rgba(37, 99, 235, 0.7);
             --glass-red: rgba(220, 38, 38, 0.7);
-            --success: #10b981;
-            --error: #ef4444;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+        body { background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; width: 100%; }
 
-        /* --- COMBAT LAYER (TETAP) --- */
+        /* --- COMBAT LAYER --- */
         #combat-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
         .aircraft { position: absolute; width: 140px; z-index: 10; filter: drop-shadow(0 15px 10px rgba(0,0,0,0.2)); will-change: transform, left, top; }
-        .missile { position: absolute; width: 6px; height: 25px; background: linear-gradient(to bottom, #475569, #1e293b); border-radius: 4px; box-shadow: 0 0 15px rgba(255, 69, 0, 0.8); }
-        .explosion-fire { position: absolute; width: 120px; height: 120px; background: radial-gradient(circle, #fff 0%, #fbbf24 20%, #ef4444 50%, #7f1d1d 80%, transparent 100%); border-radius: 50%; animation: fire-burst 0.7s forwards; }
+        .missile { position: absolute; width: 6px; height: 25px; background: linear-gradient(to bottom, #475569, #1e293b); border-radius: 4px; }
+        .explosion-fire { position: absolute; width: 100px; height: 100px; background: radial-gradient(circle, #fff, #fbbf24, #ef4444, transparent); border-radius: 50%; animation: fire-burst 0.7s forwards; }
         @keyframes fire-burst { 0% { transform: scale(0); opacity: 1; } 100% { transform: scale(2.5); opacity: 0; } }
 
-        /* --- HEADER (TETAP) --- */
+        /* --- HEADER --- */
         header { 
-            position: fixed; top: 0; width: 100%; height: 180px; 
+            position: fixed; top: 0; width: 100%; height: 160px; 
             display: flex; flex-direction: column; align-items: center; justify-content: center; 
             background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            z-index: 2000; transition: 0.6s; border-bottom: 1px solid rgba(255,255,255,0.3); 
+            z-index: 2000; transition: 0.5s; border-bottom: 1px solid rgba(255,255,255,0.3); padding: 10px;
         }
-        header.scrolled { height: 70px; flex-direction: row; padding: 0 20px; justify-content: flex-start; }
-        .profile-wrap { width: 80px; height: 80px; border-radius: 50%; padding: 4px; background: linear-gradient(45deg, var(--primary), var(--secondary)); margin-bottom: 10px; transition: 0.5s; flex-shrink: 0; }
-        header.scrolled .profile-wrap { width: 40px; height: 40px; margin-bottom: 0; margin-right: 15px; }
-        .profile-wrap img { width: 100%; height: 100%; border-radius: 50%; border: 3px solid white; object-fit: cover; }
-        header h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: 4px; color: #fff; text-shadow: 0 0 10px rgba(99, 102, 241, 0.8); text-transform: uppercase; }
-
-        /* --- CONTENT --- */
-        .content { position: relative; z-index: 100; margin-top: 220px; display: flex; flex-direction: column; align-items: center; padding: 20px; width: 100%; }
-        .add-form { background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px); padding: 25px; border-radius: 24px; width: 100%; max-width: 800px; border: 1px solid rgba(255,255,255,0.4); margin-bottom: 50px; }
-        .input-group { display: flex; gap: 10px; margin-bottom: 15px; width: 100%; }
-        input { flex: 1; padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.5); background: rgba(255, 255, 255, 0.5); outline: none; font-weight: 600; }
+        header.scrolled { height: 65px; flex-direction: row; padding: 0 15px; justify-content: flex-start; }
         
-        .color-selector { display: flex; gap: 10px; margin-bottom: 15px; justify-content: center; }
-        .color-opt { width: 45px; height: 45px; border-radius: 12px; cursor: pointer; border: 3px solid transparent; }
+        .profile-wrap { width: 70px; height: 70px; border-radius: 50%; padding: 3px; background: linear-gradient(45deg, var(--primary), var(--secondary)); margin-bottom: 8px; transition: 0.4s; flex-shrink: 0; }
+        header.scrolled .profile-wrap { width: 35px; height: 35px; margin-bottom: 0; margin-right: 12px; }
+        .profile-wrap img { width: 100%; height: 100%; border-radius: 50%; border: 2px solid white; object-fit: cover; }
+        header h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: 3px; color: #fff; text-shadow: 0 0 10px rgba(99, 102, 241, 0.8); text-transform: uppercase; }
+        header.scrolled h1 { font-size: 1.1rem; letter-spacing: 1px; }
+
+        /* --- CONTENT & FORM --- */
+        .content { position: relative; z-index: 100; margin-top: 180px; display: flex; flex-direction: column; align-items: center; padding: 15px; width: 100%; }
+        
+        .add-form { 
+            background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px); padding: 20px; 
+            border-radius: 20px; width: 100%; max-width: 600px; border: 1px solid rgba(255,255,255,0.4); margin-bottom: 40px; 
+        }
+        .input-group { display: flex; gap: 10px; margin-bottom: 12px; width: 100%; }
+        input { 
+            width: 100%; padding: 12px 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.5); 
+            background: rgba(255, 255, 255, 0.6); outline: none; font-weight: 600; font-size: 0.9rem;
+        }
+        
+        .color-selector { display: flex; gap: 8px; margin-bottom: 12px; justify-content: center; }
+        .color-opt { width: 35px; height: 35px; border-radius: 10px; cursor: pointer; border: 2px solid transparent; }
         .color-opt.active { border-color: white; transform: scale(1.1); }
         .opt-black { background: var(--glass-black); }
         .opt-blue { background: var(--glass-blue); }
         .opt-red { background: var(--glass-red); }
 
-        .btn-deploy { width: 100%; height: 50px; border-radius: 12px; border: none; background: var(--primary); color: white; font-weight: 800; cursor: pointer; transition: 0.3s; }
+        .btn-deploy { width: 100%; height: 45px; border-radius: 10px; border: none; background: var(--primary); color: white; font-weight: 800; cursor: pointer; font-size: 0.9rem; }
 
-        /* --- CARD & DELETE BUTTON --- */
-        .category-section { width: 100%; max-width: 1000px; margin-bottom: 50px; }
-        .category-divider { display: flex; align-items: center; margin-bottom: 20px; gap: 15px; }
-        .category-divider span { font-weight: 800; color: #475569; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
-        .category-divider .line { flex: 1; height: 2px; background: linear-gradient(to right, #cbd5e1, transparent); }
+        /* --- SECTIONS & GRID --- */
+        .category-section { width: 100%; max-width: 900px; margin-bottom: 35px; }
+        .category-divider { display: flex; align-items: center; margin-bottom: 15px; gap: 10px; }
+        .category-divider span { font-weight: 800; color: #475569; font-size: 0.65rem; letter-spacing: 1.5px; text-transform: uppercase; }
+        .category-divider .line { flex: 1; height: 1.5px; background: linear-gradient(to right, #cbd5e1, transparent); }
         
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; width: 100%; }
-        .card-container { position: relative; width: 100%; group; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; width: 100%; }
+        .card-container { position: relative; width: 100%; }
         .card { 
-            padding: 25px; border-radius: 18px; text-decoration: none; color: white; font-weight: 700; 
+            padding: 15px; border-radius: 15px; text-decoration: none; color: white; font-weight: 700; 
             display: flex; align-items: center; justify-content: center; text-align: center; 
-            min-height: 85px; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); 
-            width: 100%; transition: 0.3s;
+            min-height: 70px; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); 
+            width: 100%; font-size: 0.9rem;
         }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        
-        /* Tombol Hapus */
-        .btn-delete {
-            position: absolute; top: -10px; right: -10px; width: 28px; height: 28px; 
-            background: #ef4444; color: white; border-radius: 50%; border: 2px solid white;
-            display: flex; align-items: center; justify-content: center; font-size: 14px;
-            cursor: pointer; z-index: 150; opacity: 0; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .card-container:hover .btn-delete { opacity: 1; top: -5px; right: -5px; }
 
+        .btn-delete {
+            position: absolute; top: -8px; right: -8px; width: 24px; height: 24px; 
+            background: #ef4444; color: white; border-radius: 50%; border: 2px solid white;
+            display: flex; align-items: center; justify-content: center; font-size: 11px; z-index: 150;
+        }
+
+        /* --- MOBILE OPTIMIZATION (KHUSUS HP) --- */
+        @media (max-width: 600px) {
+            header { height: 120px; }
+            header h1 { font-size: 1.3rem; letter-spacing: 2px; }
+            .content { margin-top: 135px; padding: 12px; }
+            .add-form { padding: 15px; }
+            .input-group { flex-direction: column; gap: 8px; }
+            input { font-size: 0.85rem; padding: 10px; }
+            
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .card { min-height: 60px; font-size: 0.75rem; padding: 10px; border-radius: 12px; }
+            .aircraft { width: 75px; }
+            
+            .card-black { background: rgba(30, 41, 59, 0.8); }
+            .card-blue { background: rgba(37, 99, 235, 0.8); }
+            .card-red { background: rgba(220, 38, 38, 0.8); }
+        }
+
+        /* --- TOAST --- */
+        #toast-container { position: fixed; top: 15px; right: 15px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; max-width: 80%; }
+        .toast { 
+            padding: 12px 18px; border-radius: 12px; color: white; font-weight: 700; font-size: 0.8rem;
+            display: flex; align-items: center; gap: 10px; backdrop-filter: blur(10px);
+            animation: slideIn 0.3s ease forwards; box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .toast.success { background: rgba(16, 185, 129, 0.9); }
+        .toast.error { background: rgba(239, 68, 68, 0.9); }
+
+        #sound-toggle { position: fixed; bottom: 15px; left: 15px; width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.6); backdrop-filter: blur(5px); z-index: 3000; border: none; font-size: 1.2rem; }
+        
         .card-black { background: var(--glass-black); }
         .card-blue { background: var(--glass-blue); }
         .card-red { background: var(--glass-red); }
-
-        /* --- SUPER COOL POP-UP (TOAST) --- */
-        #toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
-        .toast { 
-            min-width: 280px; padding: 16px 20px; border-radius: 16px; color: white; font-weight: 700;
-            display: flex; align-items: center; gap: 12px; backdrop-filter: blur(15px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.3);
-            animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        .toast.success { background: rgba(16, 185, 129, 0.8); border-left: 6px solid #059669; }
-        .toast.error { background: rgba(239, 68, 68, 0.8); border-left: 6px solid #b91c1c; }
-
-        @media (max-width: 600px) {
-            .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-            .btn-delete { opacity: 1; width: 24px; height: 24px; top: -5px; right: -5px; }
-        }
-
-        #sound-toggle { position: fixed; bottom: 20px; left: 20px; width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.5); backdrop-filter: blur(10px); cursor: pointer; z-index: 3000; border: none; }
     </style>
 </head>
 <body>
@@ -119,8 +134,8 @@
     <div class="content">
         <div class="add-form">
             <div class="input-group">
-                <input type="text" id="name" placeholder="Website Name">
-                <input type="text" id="url" placeholder="URL Address">
+                <input type="text" id="name" placeholder="Name">
+                <input type="text" id="url" placeholder="URL">
             </div>
             <div class="color-selector">
                 <div class="color-opt opt-black active" onclick="selectColor('black', this)"></div>
@@ -140,14 +155,13 @@
         let db = [], fileSha = "", selectedColor = 'black', isMuted = false;
         const boomSound = new Audio('https://www.soundjay.com/mechanical/sounds/explosion-01.mp3');
 
-        // Notifikasi Toast
         function showToast(msg, type = 'success') {
             const container = document.getElementById('toast-container');
             const t = document.createElement('div');
             t.className = `toast ${type}`;
             t.innerHTML = `<span>${type === 'success' ? '✅' : '❌'}</span> ${msg}`;
             container.appendChild(t);
-            setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 500); }, 3500);
+            setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 400); }, 3000);
         }
 
         async function load() {
@@ -157,113 +171,69 @@
                 fileSha = data.sha;
                 db = JSON.parse(atob(data.content));
                 draw();
-            } catch (e) { showToast("Gagal memuat sistem.", "error"); }
+            } catch (e) { console.log("Init..."); }
         }
 
         function draw() {
             const container = document.getElementById('vault-sections');
             container.innerHTML = '';
             const sectors = [{id:'black', l:'BLACK SECTOR'}, {id:'blue', l:'BLUE SECTOR'}, {id:'red', l:'RED SECTOR'}];
-
             sectors.forEach(s => {
                 const filtered = db.filter(x => x.color === s.id);
                 if(filtered.length > 0) {
                     const div = document.createElement('div');
                     div.className = 'category-section';
-                    div.innerHTML = `
-                        <div class="category-divider"><span>${s.l}</span><div class="line"></div></div>
-                        <div class="grid">${filtered.map(i => `
-                            <div class="card-container">
-                                <div class="btn-delete" onclick="remove('${i.id}')">✕</div>
-                                <a href="${i.url}" target="_blank" class="card card-${s.id}">${i.name}</a>
-                            </div>`).join('')}</div>`;
+                    div.innerHTML = `<div class="category-divider"><span>${s.l}</span><div class="line"></div></div>
+                        <div class="grid">${filtered.map(i => `<div class="card-container">
+                        <div class="btn-delete" onclick="remove('${i.id}')">✕</div>
+                        <a href="${i.url}" target="_blank" class="card card-${s.id}">${i.name}</a></div>`).join('')}</div>`;
                     container.appendChild(div);
                 }
             });
         }
 
-        // FUNGSI ADD
         async function add() {
             const n = document.getElementById('name'), u = document.getElementById('url');
-            if(!n.value || !u.value) return showToast("Isi semua field!", "error");
-            
-            const token = prompt("ACCESS TOKEN REQUIRED:");
-            if(!token) return;
-
+            if(!n.value || !u.value) return showToast("Lengkapi data!", "error");
+            const token = prompt("TOKEN:"); if(!token) return;
             db.push({ id: Date.now().toString(), name: n.value, url: u.value.includes('http') ? u.value : 'https://'+u.value, color: selectedColor });
-            
-            const success = await save(token);
-            if(success) {
-                showToast("Data Berhasil di-Deploy!");
-                n.value = ''; u.value = '';
-                draw();
-            } else {
-                db.pop(); // Revert
-                showToast("Token Salah atau Gagal!", "error");
-            }
+            if(await save(token)) { showToast("Deployed!"); n.value=''; u.value=''; draw(); } 
+            else { db.pop(); showToast("Gagal!", "error"); }
         }
 
-        // FUNGSI REMOVE
         async function remove(id) {
-            const token = prompt("KONFIRMASI TOKEN UNTUK MENGHAPUS:");
-            if(!token) return;
-
-            const originalDb = [...db];
-            db = db.filter(item => item.id !== id);
-            
-            const success = await save(token);
-            if(success) {
-                showToast("Link Berhasil Dimusnahkan!");
-                draw();
-            } else {
-                db = originalDb; // Revert
-                showToast("Penghapusan Gagal / Token Salah!", "error");
-            }
+            const token = prompt("TOKEN:"); if(!token) return;
+            const old = [...db]; db = db.filter(x => x.id !== id);
+            if(await save(token)) { showToast("Removed!"); draw(); } 
+            else { db = old; showToast("Gagal!", "error"); }
         }
 
         async function save(token) {
             try {
                 const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
-                    method: "PUT", headers: { "Authorization": `token ${token}`, "Content-Type": "application/json" },
-                    body: JSON.stringify({ message: "Update DB", content: btoa(JSON.stringify(db, null, 2)), sha: fileSha })
+                    method: "PUT", headers: { "Authorization": `token ${token}` },
+                    body: JSON.stringify({ message: "Update", content: btoa(JSON.stringify(db, null, 2)), sha: fileSha })
                 });
-                if(res.ok) {
-                    const data = await res.json();
-                    fileSha = data.content.sha;
-                    return true;
-                }
+                if(res.ok) { const d = await res.json(); fileSha = d.content.sha; return true; }
                 return false;
             } catch (e) { return false; }
         }
 
-        /* --- JET MANEUVER LOGIC (PAS) --- */
-        const JET_MODELS = [
-            { name: 'F-22', speed: 5.5, maneuver: 'stealth' },
-            { name: 'Su-57', speed: 7, maneuver: 'cobra' },
-            { name: 'F-16', speed: 8.5, maneuver: 'turn' }
-        ];
-
         function spawn() {
-            const jet = JET_MODELS[Math.floor(Math.random() * JET_MODELS.length)];
-            const p = document.createElement('img');
-            p.src = "file/f22.png"; p.className = 'aircraft';
+            const p = document.createElement('img'); p.src = "file/f22.png"; p.className = 'aircraft';
             document.getElementById('combat-layer').appendChild(p);
             const side = Math.random() > 0.5;
-            let x = side ? -300 : window.innerWidth + 300, y = 100 + Math.random() * 300;
+            let x = side ? -200 : window.innerWidth + 200, y = 80 + Math.random() * 250;
             let curA = 0, tarA = 0, curYV = 0, tarYV = 0, frame = 0;
-
             const fly = setInterval(() => {
                 frame++;
-                if(jet.maneuver === 'cobra' && frame % 160 > 70 && frame % 160 < 100) { tarA = side ? -85 : 85; tarYV = -6; }
-                else if(jet.maneuver === 'turn') { tarA = Math.cos(frame*0.1)*40; tarYV = Math.sin(frame*0.1)*8; }
-                else { tarA = Math.sin(frame*0.04)*15; tarYV = Math.cos(frame*0.04)*2; }
-
-                curA += (tarA - curA) * 0.1; curYV += (tarYV - curYV) * 0.1;
-                x += side ? jet.speed : -jet.speed; y += curYV;
+                tarA = Math.sin(frame*0.05)*20; tarYV = Math.cos(frame*0.05)*3;
+                curA += (tarA - curA)*0.1; curYV += (tarYV - curYV)*0.1;
+                x += side ? 6 : -6; y += curYV;
                 p.style.left = x + 'px'; p.style.top = y + 'px';
                 p.style.transform = `scaleX(${side ? 1 : -1}) rotate(${curA}deg)`;
-                if(Math.random() < 0.006) drop(x + 70, y + 40);
-                if(x > window.innerWidth + 500 || x < -500) { clearInterval(fly); p.remove(); }
+                if(Math.random() < 0.006) drop(x + 40, y + 20);
+                if(x > window.innerWidth + 300 || x < -300) { clearInterval(fly); p.remove(); }
             }, 20);
         }
 
@@ -273,15 +243,15 @@
             document.getElementById('combat-layer').appendChild(m);
             let my = y;
             const fall = setInterval(() => {
-                my += 9; m.style.top = my + 'px';
-                if(my > window.innerHeight - 50) { clearInterval(fall); boom(x, my); m.remove(); }
+                my += 8; m.style.top = my + 'px';
+                if(my > window.innerHeight - 40) { clearInterval(fall); boom(x, my); m.remove(); }
             }, 16);
         }
 
         function boom(x, y) {
             if (!isMuted) { const s = boomSound.cloneNode(); s.volume = 0.1; s.play().catch(()=>{}); }
             const b = document.createElement('div'); b.className = 'explosion-fire';
-            b.style.left = (x - 60) + 'px'; b.style.top = (y - 60) + 'px';
+            b.style.left = (x - 50) + 'px'; b.style.top = (y - 50) + 'px';
             document.getElementById('combat-layer').appendChild(b);
             setTimeout(() => b.remove(), 700);
         }
@@ -296,11 +266,11 @@
 
         window.onscroll = () => {
             const h = document.getElementById('header');
-            if(window.scrollY > 30) h.classList.add('scrolled');
+            if(window.scrollY > 20) h.classList.add('scrolled');
             else h.classList.remove('scrolled');
         };
 
-        setInterval(spawn, 3500);
+        setInterval(spawn, 4000);
         load();
     </script>
 </body>
